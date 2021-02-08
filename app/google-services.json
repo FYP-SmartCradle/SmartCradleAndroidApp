@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "945200280534",
+    "firebase_url": "https://smartcradle-96b41-default-rtdb.firebaseio.com",
+    "project_id": "smartcradle-96b41",
+    "storage_bucket": "smartcradle-96b41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945200280534:android:a31ddb4e1862e4d6afea77",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945200280534-6i3f4i9nfudhj9r9tn3ot6nhclhabods.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLb51eDet35gP9I-COG6Ayo0DqaGkpOhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945200280534-6i3f4i9nfudhj9r9tn3ot6nhclhabods.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945200280534:android:71701a191d147c94afea77",
+        "android_client_info": {
+          "package_name": "com.example.smartcradleandroidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945200280534-6i3f4i9nfudhj9r9tn3ot6nhclhabods.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLb51eDet35gP9I-COG6Ayo0DqaGkpOhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945200280534-6i3f4i9nfudhj9r9tn3ot6nhclhabods.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945200280534:android:e082e04bb2dcafe2afea77",
+        "android_client_info": {
+          "package_name": "com.example.smartcradlefirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945200280534-6i3f4i9nfudhj9r9tn3ot6nhclhabods.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLb51eDet35gP9I-COG6Ayo0DqaGkpOhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945200280534-6i3f4i9nfudhj9r9tn3ot6nhclhabods.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

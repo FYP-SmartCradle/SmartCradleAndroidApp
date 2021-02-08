@@ -1,5 +1,11 @@
 package com.example.smartcradleandroidapp;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,29 +14,19 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toolbar;
-
 import com.example.smartcradleandroidapp.service.CradleService;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.internal.NavigationMenu;
-import com.google.android.material.internal.NavigationSubMenu;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "HomeActivity";
-
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
     private DrawerLayout drawer;
     private NavigationView navigationView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        this.startForegroundService();
     }
 
     @Override
@@ -67,6 +63,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+
+    public void startForegroundService() {
+        String input = "This is Cradle Service integration";
+        Log.v(TAG, "Service Started from home");
+
+        Intent serviceIntent = new Intent(this, CradleService.class);
+        serviceIntent.putExtra("inputExtra", input);
+        ContextCompat.startForegroundService(this, serviceIntent);
+        Log.v(TAG, "Service Started intentService");
     }
 
     public void startService(View view) {
@@ -88,6 +95,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.v(TAG, String.valueOf(item.getItemId()));
+        // TODO : I HAVE TO HANDLE EACH NAV BUTTON CLICK HERE
         return false;
     }
 
