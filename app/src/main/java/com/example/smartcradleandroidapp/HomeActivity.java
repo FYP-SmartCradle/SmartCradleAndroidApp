@@ -95,8 +95,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.v(TAG, String.valueOf(item.getItemId()));
-        // TODO : I HAVE TO HANDLE EACH NAV BUTTON CLICK HERE
+        Log.v(TAG, "On Navigation Click" + item.getTitle());
+        String itemTitle = item.getTitle().toString();
+
+        switch (itemTitle) {
+            case "Setting":
+                Intent intent = new Intent(this, AmbientInspectionActivity.class);
+                startActivity(intent);
+        }
+
         return false;
     }
 
