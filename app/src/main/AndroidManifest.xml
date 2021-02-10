@@ -12,7 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCradleAndroidApp">
-        <activity android:name=".AmbientInspectionActivity"></activity>
+        <activity
+            android:name=".user_interfaces.settings.SettingsActivity"
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".AmbientInspectionActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".HomeActivity"
             android:theme="@style/Theme.SmartCradleAndroidApp.NoActionBar" />
