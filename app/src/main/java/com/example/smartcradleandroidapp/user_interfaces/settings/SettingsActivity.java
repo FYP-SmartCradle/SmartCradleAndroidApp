@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.service.CradleService;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -98,5 +102,25 @@ public class SettingsActivity extends AppCompatActivity {
 
     private boolean isDarkThemeActivated() {
         return AppCompatDelegate.MODE_NIGHT_YES == AppCompatDelegate.getDefaultNightMode();
+    }
+
+    public void ledOnOff(View view) {
+        SwitchMaterial ledSwitch = findViewById(R.id.led_blink);
+        if (ledSwitch.isChecked()) {
+            requestForLed("on");
+        } else {
+            requestForLed("off");
+        }
+    }
+
+    private void requestForLed(String status) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://192.168.1.100:5000/led/" + status;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> System.out.println(response),
+                error -> System.out.println(error.toString()));
+
+        queue.add(stringRequest);
     }
 }
