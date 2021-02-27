@@ -20,6 +20,9 @@ import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.service.CradleService;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,6 +39,9 @@ public class SettingsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         updateSwitchState();
+
+//        Retrofit retrofit = new Retrofit.Builder().baseUrl("").addConverterFactory(GsonConverterFactory.create())
+//                .build();
     }
 
     private void updateSwitchState() {
@@ -117,10 +123,15 @@ public class SettingsActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.100:5000/led/" + status;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> System.out.println(response),
-                error -> System.out.println(error.toString()));
+        try {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    response -> System.out.println(response),
+                    error -> System.out.println(error.toString()));
 
-        queue.add(stringRequest);
+            queue.add(stringRequest);
+        } catch (Exception e) {
+            Log.v(TAG, "Error on requesting url" + url);
+        }
+
     }
 }

@@ -1,17 +1,18 @@
-package com.example.smartcradleandroidapp;
+package com.example.smartcradleandroidapp.user_interfaces.home;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.smartcradleandroidapp.R;
+import com.example.smartcradleandroidapp.user_interfaces.assistent.VoiceAssistantActivity;
 import com.example.smartcradleandroidapp.user_interfaces.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +52,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        startHomeFragmentFirst(savedInstanceState);
+
+    }
+
+
+    private void startHomeFragmentFirst(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.home_fragment_container, new HomeFragment())
+                    .commit();
+            navigationView.setCheckedItem(R.id.nav_home);
+        }
     }
 
     @Override
@@ -66,15 +80,41 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.v(TAG, "On Navigation Click" + item.getTitle());
-        String itemTitle = item.getTitle().toString();
+        int itemId = item.getItemId();
 
-        switch (itemTitle) {
-            case "Setting":
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
+        switch (itemId) {
+
+            case R.id.nav_home:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_fragment_container, new HomeFragment())
+                        .commit();
+                navigationView.setCheckedItem(R.id.nav_home);
+                break;
+
+            case R.id.nav_ambient:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_fragment_container, new AmbientFragment())
+                        .commit();
+                navigationView.setCheckedItem(R.id.nav_ambient);
+                break;
+
+            case R.id.nav_voice_assistant:
+                Intent intentVoiceAssistant = new Intent(this, VoiceAssistantActivity.class);
+                startActivity(intentVoiceAssistant);
+                navigationView.setCheckedItem(R.id.nav_voice_assistant);
+                break;
+
+            case R.id.nav_setting:
+                Intent intentSettings = new Intent(this, SettingsActivity.class);
+                startActivity(intentSettings);
+                navigationView.setCheckedItem(R.id.nav_setting);
+                break;
         }
 
-        return false;
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override

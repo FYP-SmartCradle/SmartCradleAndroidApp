@@ -14,7 +14,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.example.smartcradleandroidapp.HomeActivity;
+import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 import com.example.smartcradleandroidapp.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

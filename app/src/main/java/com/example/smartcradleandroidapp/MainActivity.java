@@ -7,6 +7,8 @@ import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
