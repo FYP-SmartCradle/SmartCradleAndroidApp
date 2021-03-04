@@ -28,8 +28,6 @@ public class VoiceAssistantActivity extends AppCompatActivity {
 
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
-
-    private TextView textView;
     private Intent intent;
 
 
@@ -37,7 +35,6 @@ public class VoiceAssistantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_assistant);
-
 
         ActivityCompat.requestPermissions(this,
                 new String[]{RECORD_AUDIO, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE},

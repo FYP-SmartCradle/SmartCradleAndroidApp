@@ -71,7 +71,9 @@ public class CradleService extends Service {
                 Log.d(TAG, "This is called at service level");
 
                 // TODO : i have to enable this for open alert activity and play ringtone
-                //playRingtoneSound();
+                if(value.equalsIgnoreCase("baby crying")){
+                    playRingtoneSound();
+                }
             }
 
             @Override

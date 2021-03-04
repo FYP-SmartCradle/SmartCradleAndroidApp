@@ -20,6 +20,26 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    /**
+     * TODO : turn on fan (not yet) (simple)
+     * TODO : temperate api (not yet) --> dynamic rendering (thread...) (intermediate)
+     * TODO : life streaming not add here (not yet) (simple)
+     *
+     * TODO : Uploading images from mobile app of the authorized people. (we have to send to the server-flask)(not recommended)
+     * (retrofit / volley are the rest api libraries) // (firebase)
+     * TODO : (not yet) // else we have to capture from the camera, (recommended) (from the mobile phone trigger the frame.)
+     * TODO : voice assistant -- (turn on fan, how is my baby (it is sleeping , temperature okay) )
+     *
+     * TODO : analytical part (show pie chart or line graph about their activity - we need posture data, cry data ) (not yet)
+     * TODO : TURN THE FAN OR CAMERA ANGLE SHOULD BE DONE FROM THE MOBILE APP. (NICE THING) (POSSIBLE) (RESET IT)
+     * static -- nothing, shaking then say shaking (no need to explore different movements.)
+     *
+     * TODO :  trigger notification. (making calling done partially -- main requirement) (cry , bad porture) -- receiver mother.
+     */
+
+
+
     private static final String TAG = "HomeActivity";
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
