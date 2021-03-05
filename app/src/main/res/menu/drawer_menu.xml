@@ -7,23 +7,27 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="Home"></item>
+            android:title="Home" />
         <item
             android:id="@+id/nav_ambient"
             android:icon="@drawable/ic_ambient"
-            android:title="Ambient"></item>
+            android:title="Ambient" />
+        <item
+            android:id="@+id/nav_electronics"
+            android:icon="@drawable/ic_plug"
+            android:title="Home" />
         <item
             android:id="@+id/nav_live_streaming"
             android:icon="@drawable/ic_live_streaming"
-            android:title="Live Streaming"></item>
+            android:title="Live Streaming" />
         <item
             android:id="@+id/nav_voice_assistant"
             android:icon="@drawable/ic_voice_assistant"
-            android:title="Voice Assistent"></item>
+            android:title="Voice Assistant" />
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings"
-            android:title="Setting"></item>
+            android:title="Setting" />
     </group>
 
     <item android:title="Quick Setting">
@@ -31,7 +35,7 @@
             <item
                 android:id="@+id/shut_down"
                 android:icon="@drawable/ic_shutdown"
-                android:title="Turn Off"></item>
+                android:title="Turn Off" />
         </menu>
     </item>
 </menu>

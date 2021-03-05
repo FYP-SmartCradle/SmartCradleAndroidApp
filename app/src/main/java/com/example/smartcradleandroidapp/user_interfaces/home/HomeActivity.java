@@ -1,5 +1,6 @@
 package com.example.smartcradleandroidapp.user_interfaces.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.user_interfaces.assistent.VoiceAssistantActivity;
+import com.example.smartcradleandroidapp.user_interfaces.live_streaming.LiveSteamingActivity;
 import com.example.smartcradleandroidapp.user_interfaces.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      * TODO : TURN THE FAN OR CAMERA ANGLE SHOULD BE DONE FROM THE MOBILE APP. (NICE THING) (POSSIBLE) (RESET IT)
      * static -- nothing, shaking then say shaking (no need to explore different movements.)
      *
-     * TODO :  trigger notification. (making calling done partially -- main requirement) (cry , bad porture) -- receiver mother.
+     * TODO :  trigger notification. (making calling done partially -- main requirement) (cry , bad posture) -- receiver mother.
      */
 
 
@@ -71,7 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
         startHomeFragmentFirst(savedInstanceState);
 
     }
@@ -97,6 +98,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.v(TAG, "On Navigation Click" + item.getTitle());
@@ -110,6 +112,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.home_fragment_container, new HomeFragment())
                         .commit();
                 navigationView.setCheckedItem(R.id.nav_home);
+                break;
+
+            case R.id.nav_live_streaming:
+                Intent liveStreamingIntent = new Intent(this, LiveSteamingActivity.class);
+                startActivity(liveStreamingIntent);
                 break;
 
             case R.id.nav_ambient:
@@ -132,7 +139,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_setting);
                 break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
