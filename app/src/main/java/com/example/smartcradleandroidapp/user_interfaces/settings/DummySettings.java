@@ -1,8 +1,8 @@
 package com.example.smartcradleandroidapp.user_interfaces.settings;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartcradleandroidapp.R;
 

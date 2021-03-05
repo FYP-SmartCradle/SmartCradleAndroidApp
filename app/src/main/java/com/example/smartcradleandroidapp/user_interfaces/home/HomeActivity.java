@@ -147,7 +147,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .setNeutralButton("Cancel", (dialog, which) -> {
                             //TODO : DO NOTHING AND CLOSES THE DIALOG
                         }).setPositiveButton("Turn Off", (dialog, which) -> {
-                        // TODO : SHUTDOWN THE SERVER BY RUNNING sudo shutdown;
+                    // TODO : SHUTDOWN THE SERVER BY RUNNING sudo shutdown;
                 }).show();
                 break;
         }

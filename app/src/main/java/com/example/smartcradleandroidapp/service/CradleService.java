@@ -14,8 +14,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 import com.example.smartcradleandroidapp.MainActivity;
+import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,7 +71,7 @@ public class CradleService extends Service {
                 Log.d(TAG, "This is called at service level");
 
                 // TODO : i have to enable this for open alert activity and play ringtone
-                if(value.equalsIgnoreCase("baby crying")){
+                if (value.equalsIgnoreCase("baby crying")) {
                     playRingtoneSound();
                 }
             }

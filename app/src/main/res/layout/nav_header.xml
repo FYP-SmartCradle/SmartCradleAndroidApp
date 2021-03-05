@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Smart Cradle"
-        android:textColor="?attr/colorOnPrimary"
-        android:textAppearance="?attr/textAppearanceHeadline6"></TextView>
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?attr/colorOnPrimary"></TextView>
 
 </LinearLayout>

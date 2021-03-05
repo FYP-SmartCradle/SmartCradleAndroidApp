@@ -20,9 +20,6 @@ import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.service.CradleService;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 
 public class SettingsActivity extends AppCompatActivity {
 
