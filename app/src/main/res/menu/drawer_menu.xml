@@ -33,7 +33,7 @@
     <item android:title="Quick Setting">
         <menu>
             <item
-                android:id="@+id/shut_down"
+                android:id="@+id/nav_shut_down"
                 android:icon="@drawable/ic_shutdown"
                 android:title="Turn Off" />
         </menu>

@@ -16,6 +16,7 @@ import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.user_interfaces.assistent.VoiceAssistantActivity;
 import com.example.smartcradleandroidapp.user_interfaces.live_streaming.LiveSteamingActivity;
 import com.example.smartcradleandroidapp.user_interfaces.settings.SettingsActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,19 +28,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
      * TODO : turn on fan (not yet) (simple)
      * TODO : temperate api (not yet) --> dynamic rendering (thread...) (intermediate)
      * TODO : life streaming not add here (not yet) (simple)
-     *
+     * <p>
      * TODO : Uploading images from mobile app of the authorized people. (we have to send to the server-flask)(not recommended)
      * (retrofit / volley are the rest api libraries) // (firebase)
      * TODO : (not yet) // else we have to capture from the camera, (recommended) (from the mobile phone trigger the frame.)
      * TODO : voice assistant -- (turn on fan, how is my baby (it is sleeping , temperature okay) )
-     *
+     * <p>
      * TODO : analytical part (show pie chart or line graph about their activity - we need posture data, cry data ) (not yet)
      * TODO : TURN THE FAN OR CAMERA ANGLE SHOULD BE DONE FROM THE MOBILE APP. (NICE THING) (POSSIBLE) (RESET IT)
      * static -- nothing, shaking then say shaking (no need to explore different movements.)
-     *
+     * <p>
      * TODO :  trigger notification. (making calling done partially -- main requirement) (cry , bad posture) -- receiver mother.
      */
-
 
 
     private static final String TAG = "HomeActivity";
@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "ResourceType"})
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.v(TAG, "On Navigation Click" + item.getTitle());
@@ -137,6 +137,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent intentSettings = new Intent(this, SettingsActivity.class);
                 startActivity(intentSettings);
                 navigationView.setCheckedItem(R.id.nav_setting);
+                break;
+
+            case R.id.nav_shut_down:
+                MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
+                materialAlertDialogBuilder
+                        .setTitle("Do you want to turn off")
+                        .setMessage("Turning of this will shutdown the system fully")
+                        .setNeutralButton("Cancel", (dialog, which) -> {
+                            //TODO : DO NOTHING AND CLOSES THE DIALOG
+                        }).setPositiveButton("Turn Off", (dialog, which) -> {
+                        // TODO : SHUTDOWN THE SERVER BY RUNNING sudo shutdown;
+                }).show();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
