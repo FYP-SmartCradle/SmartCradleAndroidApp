@@ -16,9 +16,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.anychart.anychart.AnyChart;
+import com.anychart.anychart.AnyChartView;
+import com.anychart.anychart.DataEntry;
+import com.anychart.anychart.Pie;
+import com.anychart.anychart.ValueDataEntry;
 import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.service.CradleService;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -33,9 +41,21 @@ public class SettingsActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         // Enable the Up button
+        assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
 
         updateSwitchState();
+
+
+        Pie pie = AnyChart.pie();
+        List<DataEntry> data = new ArrayList<>();
+        data.add(new ValueDataEntry("John", 10000));
+        data.add(new ValueDataEntry("Jake", 12000));
+        data.add(new ValueDataEntry("Peter", 18000));
+
+        pie.setData(data);
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+        anyChartView.setChart(pie);
 
 //        Retrofit retrofit = new Retrofit.Builder().baseUrl("").addConverterFactory(GsonConverterFactory.create())
 //                .build();
@@ -44,17 +64,8 @@ public class SettingsActivity extends AppCompatActivity {
     private void updateSwitchState() {
         serviceSwitch = findViewById(R.id.service_switch);
         switchTheme = findViewById(R.id.theme_switch);
-        if (isDarkThemeActivated()) {
-            switchTheme.setChecked(true);
-        } else {
-            switchTheme.setChecked(false);
-        }
-
-        if (isCradleServiceRunning(CradleService.class)) {
-            serviceSwitch.setChecked(true);
-        } else {
-            serviceSwitch.setChecked(false);
-        }
+        switchTheme.setChecked(isDarkThemeActivated());
+        serviceSwitch.setChecked(isCradleServiceRunning(CradleService.class));
 
     }
 
@@ -96,7 +107,7 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean isCradleServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
+            if (CradleService.class.getName().equals(service.service.getClassName())) {
                 return true;
             }
         }
@@ -122,7 +133,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         try {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    response -> System.out.println(response),
+                    System.out::println,
                     error -> System.out.println(error.toString()));
 
             queue.add(stringRequest);
