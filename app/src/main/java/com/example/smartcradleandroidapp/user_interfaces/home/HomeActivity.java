@@ -25,20 +25,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     /**
-     * TODO : turn on fan (not yet) (simple)
-     * TODO : temperate api (not yet) --> dynamic rendering (thread...) (intermediate)
-     * TODO : life streaming not add here (not yet) (simple)
+     * TODO : Turn on fan (not yet) (simple)
+     * TODO : Temperate api (not yet) --> dynamic rendering (thread...) (intermediate)
+     * TODO : Life streaming not add here (not yet) (simple)
      * <p>
      * TODO : Uploading images from mobile app of the authorized people. (we have to send to the server-flask)(not recommended)
      * (retrofit / volley are the rest api libraries) // (firebase)
      * TODO : (not yet) // else we have to capture from the camera, (recommended) (from the mobile phone trigger the frame.)
-     * TODO : voice assistant -- (turn on fan, how is my baby (it is sleeping , temperature okay) )
+     * TODO : Voice assistant -- (turn on fan, how is my baby (it is sleeping , temperature okay) )
      * <p>
-     * TODO : analytical part (show pie chart or line graph about their activity - we need posture data, cry data ) (not yet)
+     * TODO : Analytical part (show pie chart or line graph about their activity - we need posture data, cry data ) (not yet)
      * TODO : TURN THE FAN OR CAMERA ANGLE SHOULD BE DONE FROM THE MOBILE APP. (NICE THING) (POSSIBLE) (RESET IT)
      * static -- nothing, shaking then say shaking (no need to explore different movements.)
      * <p>
-     * TODO :  trigger notification. (making calling done partially -- main requirement) (cry , bad posture) -- receiver mother.
+     * TODO : Trigger notification. (making calling done partially -- main requirement) (cry , bad posture) -- receiver mother.
+     * TODO : Gallery view  , the media server config has been done on flask so, we need to do the galary view on the app by taking image url in pagination.
      */
 
 
