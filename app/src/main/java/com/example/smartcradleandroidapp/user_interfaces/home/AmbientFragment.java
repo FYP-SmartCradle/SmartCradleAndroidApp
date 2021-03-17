@@ -29,8 +29,6 @@ public class AmbientFragment extends Fragment {
 
     @Override
     public void onStart() {
-
-
         super.onStart();
     }
 }

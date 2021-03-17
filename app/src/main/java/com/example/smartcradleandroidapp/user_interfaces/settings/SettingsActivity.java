@@ -130,16 +130,13 @@ public class SettingsActivity extends AppCompatActivity {
     private void requestForLed(String status) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.100:5000/led/" + status;
-
         try {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     System.out::println,
                     error -> System.out.println(error.toString()));
-
             queue.add(stringRequest);
         } catch (Exception e) {
             Log.v(TAG, "Error on requesting url" + url);
         }
-
     }
 }
