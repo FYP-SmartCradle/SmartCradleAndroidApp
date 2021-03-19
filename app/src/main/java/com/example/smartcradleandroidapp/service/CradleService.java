@@ -1,26 +1,42 @@
 package com.example.smartcradleandroidapp.service;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
+import android.os.PowerManager;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.smartcradleandroidapp.MainActivity;
+import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
+import com.example.smartcradleandroidapp.user_interfaces.settings.DummySettings;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.zip.Inflater;
 
 public class CradleService extends Service {
 
@@ -34,6 +50,7 @@ public class CradleService extends Service {
         //only one time. when there service starts first time. only once in the lifecycle
         this.myRefOnClickListener();
         super.onCreate();
+
     }
 
     @Override
@@ -62,7 +79,7 @@ public class CradleService extends Service {
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
@@ -72,12 +89,13 @@ public class CradleService extends Service {
 
                 // TODO : i have to enable this for open alert activity and play ringtone
                 if (value.equalsIgnoreCase("baby crying")) {
+
                     playRingtoneSound();
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
@@ -102,7 +120,21 @@ public class CradleService extends Service {
             ringtone.stop();
         }).start();
 
-        Intent intent = new Intent(this, HomeActivity.class);
+
+        /*PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = pm.isInteractive(); // check if screen is on
+        int flags = PowerManager.FULL_WAKE_LOCK
+                | PowerManager.ACQUIRE_CAUSES_WAKEUP
+                | PowerManager.ON_AFTER_RELEASE;
+        if (!isScreenOn) {
+            PowerManager.WakeLock wl = pm.newWakeLock(flags, "my_app:full_lock");
+            wl.acquire(20000); //set your time in milliseconds
+        }*/
+
+
+
+        //this is actually working when the phone screen is turn on
+        Intent intent = new Intent(this, DummySettings.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
