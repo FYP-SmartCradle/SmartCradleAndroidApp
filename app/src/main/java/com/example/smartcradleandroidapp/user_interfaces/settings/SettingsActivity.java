@@ -43,6 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Enable the Up button
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle("Setting");
 
         updateSwitchState();
 

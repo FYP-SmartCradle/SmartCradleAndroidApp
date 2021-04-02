@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCradleAndroidApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user_interfaces.settings.SettingsPreferenceActivity"></activity>
+        <activity android:name=".user_interfaces.settings.SettingsPreferenceActivity"
+            android:parentActivityName=".user_interfaces.home.HomeActivity"/>
         <activity
             android:name=".user_interfaces.live_streaming.LiveSteamingActivity"
             android:parentActivityName=".user_interfaces.home.HomeActivity" />
@@ -50,7 +51,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Service -->

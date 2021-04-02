@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="pref_key_theme">pref_key_theme</string>
+    <string name="pref_key_services">pref_key_services</string>
     <string name="server_ip_address">server_ip_address</string>
 
     <string name="saved_server_ip_address">saved_server_ip_address</string>

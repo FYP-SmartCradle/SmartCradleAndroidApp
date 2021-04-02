@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:key="notifications_category"
-        app:title="Notifications">
+        app:key="service_category"
+        app:title="Services">
 
         <SwitchPreferenceCompat
-            app:key="notifications"
-            app:title="Enable message notifications"/>
+            app:icon="@drawable/ic_services"
+            app:key="@string/pref_key_services"
+            app:title="Enable background services for alerts"/>
 
     </PreferenceCategory>
 
