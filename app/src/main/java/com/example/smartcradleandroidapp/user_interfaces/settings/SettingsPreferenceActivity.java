@@ -1,16 +1,16 @@
 package com.example.smartcradleandroidapp.user_interfaces.settings;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import android.os.Bundle;
-
 
 public class SettingsPreferenceActivity extends AppCompatActivity implements
-        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback{
+        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,10 @@ public class SettingsPreferenceActivity extends AppCompatActivity implements
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, 0);
         // Replace the existing Fragment with the new Fragment
-        /*getSupportFragmentManager().beginTransaction()
-                .replace(R.xml.pref_network_settings, fragment)
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, fragment)
                 .addToBackStack(null)
-                .commit();*/
+                .commit();
         return true;
     }
 }

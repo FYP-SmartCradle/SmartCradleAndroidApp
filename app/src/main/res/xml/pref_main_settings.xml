@@ -25,6 +25,7 @@
             app:key="pref_network_settings"
             app:icon="@drawable/ic_settings_ethernet"
             app:summary="Configure the AI Network IP address"
+            app:fragment="com.example.smartcradleandroidapp.NetworkSettingFragment"
             app:title="Network Settings" />
         <EditTextPreference
             app:icon="@drawable/ic_vpn_lock"
