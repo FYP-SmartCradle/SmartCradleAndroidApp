@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_key_theme">pref_key_theme</string>
+    <string name="server_ip_address">server_ip_address</string>
+
+    <string name="saved_server_ip_address">saved_server_ip_address</string>
+    <string name="saved_theme">saved_theme</string>
+
+
+    <string name="saved_light_theme">saved_light_theme</string>
+    <string name="saved_dark_theme">saved_dark_theme</string>
+
+
+</resources>

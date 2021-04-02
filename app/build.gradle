@@ -42,7 +42,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //USE PREFERENCE COMPACT
-    implementation 'com.android.support:preference-v7'
+    implementation "androidx.preference:preference:1.1.1"
 
     //RETROFIT TO REST API CALLS (CONTAINS JACKSON)
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
