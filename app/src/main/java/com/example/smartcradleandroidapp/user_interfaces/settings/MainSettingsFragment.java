@@ -44,7 +44,7 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getResources().getString(R.string.saved_server_ip_address), value.toString());
             editor.apply();
-            serverIpAddressPreference.setSummary(value.toString());
+            getServerIpAddressFromStored();
             return true;
         });
     }
@@ -74,6 +74,7 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         String saved_ip_address = getResources().getString(R.string.saved_server_ip_address);
         saved_ip_address = sharedPref.getString(saved_ip_address, "");
+        System.out.println("saved ip address " + saved_ip_address);
         serverIpAddressPreference.setSummary(saved_ip_address);
         return saved_ip_address;
     }

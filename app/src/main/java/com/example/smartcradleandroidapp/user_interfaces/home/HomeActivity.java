@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getThemeFromStored();
+
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -162,22 +162,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    void getThemeFromStored() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String savedTheme = getResources().getString(R.string.saved_theme);
-        savedTheme = sharedPref.getString(savedTheme, getResources().getString(R.string.saved_light_theme));
-        System.out.println("saved theme in home fragement :: " + savedTheme);
-        if (savedTheme.equalsIgnoreCase(getResources().getString(R.string.saved_light_theme))) {
-            System.out.println("saved theme in home true case :: " + savedTheme);
-            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        } else {
-            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
-                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }
-        }
-    }
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
