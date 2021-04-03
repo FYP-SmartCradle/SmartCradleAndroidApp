@@ -148,7 +148,6 @@ public class VoiceAssistantActivity extends AppCompatActivity {
     }*/
 
     private void startSpeechRecognition() {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             textToSpeech.speak("Hi Senduran , how can i help you?", TextToSpeech.QUEUE_FLUSH, null, null);
         } else {
