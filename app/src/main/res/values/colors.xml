@@ -10,9 +10,9 @@
 
 
 
-    <color name="amber_200">#E3E302</color>
-    <color name="amber_500">#D3AF14</color>
-    <color name="amber_700">#BF7A0A</color>
+    <color name="amber_200">#F8F80B</color>
+    <color name="amber_500">#F8CB0C</color>
+    <color name="amber_700">#FFA40F</color>
     <color name="green_200">#84D197</color>
     <color name="green_700">#229A28</color>
 </resources>
