@@ -6,79 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".user_interfaces.live_streaming.LiveSteamingActivity">
 
+
     <WebView
         android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="385dp"
+        android:layout_height="270dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_live_stream_capture"
         style="@style/Widget.MaterialComponents.Button.IconOnly"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="24dp"
-        app:icon="@drawable/ic_settings"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="406dp" />
-
-    <Button
-        style="@style/Widget.MaterialComponents.Button.IconOnly"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginEnd="24dp"
-        app:icon="@drawable/ic_settings"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="406dp" />
-
-    <Button
-        android:id="@+id/button3"
-        style="@style/Widget.MaterialComponents.Button.IconOnly"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="24dp"
-        app:icon="@drawable/ic_settings"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="181dp" />
-
-    <Button
-        android:id="@+id/button2"
-        style="@style/Widget.MaterialComponents.Button.IconOnly"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        app:icon="@drawable/ic_settings"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="181dp" />
-
-    <Button
-        android:id="@+id/button"
-        style="@style/Widget.MaterialComponents.Button.IconOnly"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="32dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="116dp"
+        android:onClick="captureView"
         app:icon="@drawable/ic_camera"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webview"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/webview" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_reload_live_streaming"
+        style="@style/Widget.MaterialComponents.Button.IconOnly"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="29dp"
+        android:onClick="reloadWebView"
+        app:icon="@drawable/ic_refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_live_stream_capture" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

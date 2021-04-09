@@ -15,7 +15,7 @@
         <item
             android:id="@+id/nav_electronics"
             android:icon="@drawable/ic_plug"
-            android:title="Home" />
+            android:title="Appliance" />
         <item
             android:id="@+id/nav_live_streaming"
             android:icon="@drawable/ic_live_streaming"

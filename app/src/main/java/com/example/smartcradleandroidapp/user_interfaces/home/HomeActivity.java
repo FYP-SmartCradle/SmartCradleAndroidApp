@@ -123,6 +123,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_live_streaming:
                 Intent liveStreamingIntent = new Intent(this, LiveSteamingActivity.class);
                 startActivity(liveStreamingIntent);
+                navigationView.setCheckedItem(R.id.nav_live_streaming);
+                break;
+
+
+            case  R.id.nav_electronics:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_fragment_container, new HomeApplianceFragment())
+                        .commit();
+                navigationView.setCheckedItem(R.id.nav_electronics);
                 break;
 
             case R.id.nav_ambient:
