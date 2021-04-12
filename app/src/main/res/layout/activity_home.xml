@@ -12,16 +12,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+                android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
+            android:background="@color/primary_green"
             android:theme="@style/Theme.SmartCradleAndroidApp"
-            app:title="Home"
             app:titleTextColor="?attr/colorOnPrimary" />
 
         <FrameLayout
@@ -32,13 +30,13 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:background="@drawable/ic_liquid_cheese_2"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
+              android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

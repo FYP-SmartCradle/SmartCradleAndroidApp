@@ -56,6 +56,9 @@
             </intent-filter>
         </activity> <!-- Service -->
         <service android:name=".service.CradleService" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
