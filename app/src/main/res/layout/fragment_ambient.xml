@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/temparature_backgroud"
     tools:context=".user_interfaces.home.AmbientFragment">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="match_parent">
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView2"
             android:layout_width="match_parent"
@@ -56,7 +55,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginStart="3dp"
                     android:fontFamily="@font/poppins_light"
                     android:paddingStart="20dp"
                     android:text="View the surrounding conditions"
@@ -84,8 +83,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/textView4"
@@ -113,8 +112,8 @@
 
 
                 <TextView
-                    android:layout_width="310dp"
-                    android:layout_height="135dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
@@ -122,7 +121,7 @@
                     android:gravity="center"
                     android:text="25.5C"
                     android:textColor="@color/primary_amber"
-                    android:textSize="100sp"
+                    android:textSize="60sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -147,11 +146,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
                 <ImageView
-
                     android:id="@+id/imageView3"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -176,8 +174,8 @@
 
 
                 <TextView
-                    android:layout_width="302dp"
-                    android:layout_height="126dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
@@ -185,7 +183,7 @@
                     android:gravity="center"
                     android:text="50%"
                     android:textColor="@color/primary_amber"
-                    android:textSize="100sp"
+                    android:textSize="60sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -194,5 +192,4 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
