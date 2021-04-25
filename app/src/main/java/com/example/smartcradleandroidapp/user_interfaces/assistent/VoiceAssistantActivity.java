@@ -42,6 +42,7 @@ public class VoiceAssistantActivity extends AppCompatActivity {
 
         intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,6 );
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
 
@@ -57,6 +58,7 @@ public class VoiceAssistantActivity extends AppCompatActivity {
             @Override
             public void onReadyForSpeech(Bundle params) {
                 Log.e("SR :: ", "On Ready for Speech");
+
                 speechRecognizer.startListening(intent);
             }
 
@@ -92,6 +94,7 @@ public class VoiceAssistantActivity extends AppCompatActivity {
                 Log.e("TTS :: ", "start recognizing top");
                 if (matches != null) {
                     string = matches.get(0);
+                    System.out.println(matches.get(0));
 
                     if (string.equals("Hi Hello")) {
                         Toast.makeText(VoiceAssistantActivity.this, string, Toast.LENGTH_SHORT).show();
