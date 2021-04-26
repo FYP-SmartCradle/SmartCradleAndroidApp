@@ -28,8 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCradleAndroidApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user_interfaces.settings.SettingsPreferenceActivity"
-            android:parentActivityName=".user_interfaces.home.HomeActivity"/>
+        <activity
+            android:name=".user_interfaces.settings.SettingsPreferenceActivity"
+            android:parentActivityName=".user_interfaces.home.HomeActivity" />
         <activity
             android:name=".user_interfaces.live_streaming.LiveSteamingActivity"
             android:parentActivityName=".user_interfaces.home.HomeActivity" />
@@ -39,7 +40,7 @@
         <activity
             android:name=".user_interfaces.settings.DummySettings"
             android:parentActivityName=".user_interfaces.home.HomeActivity"
-            android:theme="@style/Theme.SmartCradleAndroidApp.NoActionBar"/>
+            android:theme="@style/Theme.SmartCradleAndroidApp.NoActionBar" />
         <activity
             android:name=".user_interfaces.settings.SettingsActivity"
             android:parentActivityName=".user_interfaces.home.HomeActivity" />
