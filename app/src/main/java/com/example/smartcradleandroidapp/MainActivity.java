@@ -12,14 +12,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
-        getSupportActionBar().hide();
         getThemeFromStored();
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {

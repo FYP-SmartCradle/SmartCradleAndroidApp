@@ -1,42 +1,31 @@
 package com.example.smartcradleandroidapp.service;
 
-import android.app.Activity;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
-import android.os.PowerManager;
-import android.text.Layout;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.smartcradleandroidapp.MainActivity;
-import com.example.smartcradleandroidapp.R;
-import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 import com.example.smartcradleandroidapp.user_interfaces.settings.DummySettings;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.zip.Inflater;
 
 public class CradleService extends Service {
 
@@ -45,11 +34,21 @@ public class CradleService extends Service {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("message");
 
+    private Looper serviceLooper;
+    private ServiceHandler serviceHandler;
+
     @Override
     public void onCreate() {
         //only one time. when there service starts first time. only once in the lifecycle
         this.myRefOnClickListener();
         super.onCreate();
+
+        HandlerThread thread = new HandlerThread("ServiceStartArguments");
+        thread.start();
+
+        // Get the HandlerThread's Looper and use it for our Handler
+        serviceLooper = thread.getLooper();
+        serviceHandler = new ServiceHandler(serviceLooper);
 
     }
 
@@ -72,6 +71,7 @@ public class CradleService extends Service {
         startForeground(1, notification);
 
 
+
         return START_NOT_STICKY;
     }
 
@@ -85,12 +85,17 @@ public class CradleService extends Service {
                 String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Firebase value Value is: " + value);
 
-                Log.d(TAG, "This is called at service level");
-
                 // TODO : i have to enable this for open alert activity and play ringtone
                 if (value.equalsIgnoreCase("baby crying")) {
 
-                    playRingtoneSound();
+                    System.out.println("baby crying found");
+
+                    Message msg = serviceHandler.obtainMessage();
+                    msg.arg1 = 10041996;
+                    serviceHandler.sendMessage(msg);
+
+                    startAlertActivity();
+                    //playRingtoneSound();
                 }
             }
 
@@ -121,22 +126,49 @@ public class CradleService extends Service {
         }).start();
 
 
-        /*PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
-        boolean isScreenOn = pm.isInteractive(); // check if screen is on
-        int flags = PowerManager.FULL_WAKE_LOCK
-                | PowerManager.ACQUIRE_CAUSES_WAKEUP
-                | PowerManager.ON_AFTER_RELEASE;
-        if (!isScreenOn) {
-            PowerManager.WakeLock wl = pm.newWakeLock(flags, "my_app:full_lock");
-            wl.acquire(20000); //set your time in milliseconds
-        }*/
-
-
-
         //this is actually working when the phone screen is turn on
         Intent intent = new Intent(this, DummySettings.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void startAlertActivity() {
+        Intent intent = new Intent(this, DummySettings.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+
+    // Handler that receives messages from the thread
+    private final class ServiceHandler extends Handler {
+        public ServiceHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            // Normally we would do some work here, like download a file.
+            // For our sample, we just sleep for 5 seconds.
+
+            System.out.println("we are inside the thread");
+
+            try {
+                Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+                if (alarmUri == null) {
+                    alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                }
+                Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), alarmUri);
+                ringtone.play();
+                Thread.sleep(5000);
+                ringtone.stop();
+            } catch (InterruptedException e) {
+                // Restore interrupt status.
+                Thread.currentThread().interrupt();
+            }
+            // Stop the service using the startId, so that we don't stop
+            // the service in the middle of handling another job
+            stopSelf(msg.arg1);
+        }
     }
 
 

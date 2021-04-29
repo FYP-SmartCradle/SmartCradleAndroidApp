@@ -38,13 +38,9 @@ public class VoiceAssistantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_assistant);
-
         voiceAssistantStateIndicatorTextView = findViewById(R.id.voice_assistant_state);
-
         requestForPermissions();
         initiateSpeechRecognizer();
-
-
     }
 
     void initiateTextToSpeech() {

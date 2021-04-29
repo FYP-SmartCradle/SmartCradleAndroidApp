@@ -17,6 +17,8 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.service.CradleService;
 
+import java.util.Objects;
+
 public class MainSettingsFragment extends PreferenceFragmentCompat {
 
     private static final String TAG = "MainSettingsFragment";
@@ -85,7 +87,7 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
     }
 
     void getServerIpAddressFromStored() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
         String saved_ip_address = getResources().getString(R.string.saved_server_ip_address);
         saved_ip_address = sharedPref.getString(saved_ip_address, "0.0.0.0");
         System.out.println("saved ip address " + saved_ip_address);
@@ -93,7 +95,7 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
     }
 
     void getThemeFromStored() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
         String savedTheme = getResources().getString(R.string.saved_theme);
         savedTheme = sharedPref.getString(savedTheme, getResources().getString(R.string.saved_light_theme));
         System.out.println("saved theme on settings preference " + savedTheme);
@@ -116,7 +118,7 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private boolean isCradleServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager manager = (ActivityManager) requireActivity().getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (CradleService.class.getName().equals(service.service.getClassName())) {
                 return true;
@@ -143,14 +145,14 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
 
         Intent serviceIntent = new Intent(getContext(), CradleService.class);
         serviceIntent.putExtra("sendWithKey", input);
-        ContextCompat.startForegroundService(getContext(), serviceIntent);
+        ContextCompat.startForegroundService(requireContext(), serviceIntent);
         Log.v(TAG, "Service Started intentService");
 
     }
 
     public void stopCradleForegroundService() {
         Intent serviceIntent = new Intent(getContext(), CradleService.class);
-        getActivity().stopService(serviceIntent);
+        requireActivity().stopService(serviceIntent);
         Log.v(TAG, "Service Stopped from home");
     }
 
