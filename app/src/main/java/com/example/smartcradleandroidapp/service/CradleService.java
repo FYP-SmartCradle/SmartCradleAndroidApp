@@ -39,7 +39,6 @@ public class CradleService extends Service {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("message");
 
-    private Looper serviceLooper;
     private ServiceHandler serviceHandler;
     private TextToSpeech textToSpeech;
 
@@ -54,7 +53,7 @@ public class CradleService extends Service {
 
         initiateTextToSpeech();
         // Get the HandlerThread's Looper and use it for our Handler
-        serviceLooper = thread.getLooper();
+        Looper serviceLooper = thread.getLooper();
         serviceHandler = new ServiceHandler(serviceLooper);
 
     }
@@ -91,7 +90,7 @@ public class CradleService extends Service {
                 String value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Firebase value Value is: " + value);
 
-                // TODO : i have to enable this for open alert activity and play ringtone
+                assert value != null;
                 if (value.equalsIgnoreCase("cry")) {
 
                     System.out.println("baby crying found");
@@ -133,7 +132,14 @@ public class CradleService extends Service {
     }
 
     public void playAssistantSound(String msg) {
-        textToSpeech.speak(msg, TextToSpeech.QUEUE_FLUSH, null, null);
+
+        String userName = getUsernameFromStored();
+        String babyName = getBabyNameFromStored();
+
+        StringBuilder speechBuilder = new StringBuilder();
+        speechBuilder.append("Hey! ").append(userName).append(", ").append(babyName).append("is now ").append(msg);
+
+        textToSpeech.speak(speechBuilder.toString(), TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
     private void startAlertActivity() {
@@ -194,7 +200,7 @@ public class CradleService extends Service {
             int alertTrigger = msg.arg2;
 
             if (alertTrigger == 0) {
-                playAssistantSound("hello");
+                playAssistantSound("cry");
             }
             if (alertTrigger == 1) {
                 playRingtoneSound();
