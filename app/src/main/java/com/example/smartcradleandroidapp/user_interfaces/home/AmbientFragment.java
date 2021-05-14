@@ -7,16 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.anychart.anychart.AnyChart;
-import com.anychart.anychart.AnyChartView;
-import com.anychart.anychart.DataEntry;
-import com.anychart.anychart.Pie;
-import com.anychart.anychart.ValueDataEntry;
 import com.example.smartcradleandroidapp.R;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 
 public class AmbientFragment extends Fragment {

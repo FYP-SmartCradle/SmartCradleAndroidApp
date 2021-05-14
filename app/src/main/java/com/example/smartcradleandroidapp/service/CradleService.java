@@ -3,8 +3,8 @@ package com.example.smartcradleandroidapp.service;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -13,19 +13,24 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import com.example.smartcradleandroidapp.MainActivity;
+import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.user_interfaces.settings.DummySettings;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 public class CradleService extends Service {
 
@@ -36,6 +41,7 @@ public class CradleService extends Service {
 
     private Looper serviceLooper;
     private ServiceHandler serviceHandler;
+    private TextToSpeech textToSpeech;
 
     @Override
     public void onCreate() {
@@ -46,6 +52,7 @@ public class CradleService extends Service {
         HandlerThread thread = new HandlerThread("ServiceStartArguments");
         thread.start();
 
+        initiateTextToSpeech();
         // Get the HandlerThread's Looper and use it for our Handler
         serviceLooper = thread.getLooper();
         serviceHandler = new ServiceHandler(serviceLooper);
@@ -71,7 +78,6 @@ public class CradleService extends Service {
         startForeground(1, notification);
 
 
-
         return START_NOT_STICKY;
     }
 
@@ -86,12 +92,14 @@ public class CradleService extends Service {
                 Log.d(TAG, "Firebase value Value is: " + value);
 
                 // TODO : i have to enable this for open alert activity and play ringtone
-                if (value.equalsIgnoreCase("baby crying")) {
+                if (value.equalsIgnoreCase("cry")) {
 
                     System.out.println("baby crying found");
 
                     Message msg = serviceHandler.obtainMessage();
                     msg.arg1 = 10041996;
+                    msg.arg2 = 0;
+
                     serviceHandler.sendMessage(msg);
 
                     startAlertActivity();
@@ -109,27 +117,23 @@ public class CradleService extends Service {
 
 
     private void playRingtoneSound() {
-        Context context = this;
-        new Thread(() -> {
+        try {
             Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
             if (alarmUri == null) {
                 alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
             }
-            Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), alarmUri);
             ringtone.play();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(5000);
             ringtone.stop();
-        }).start();
+        } catch (InterruptedException e) {
+            // Restore interrupt status.
+            Thread.currentThread().interrupt();
+        }
+    }
 
-
-        //this is actually working when the phone screen is turn on
-        Intent intent = new Intent(this, DummySettings.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+    public void playAssistantSound(String msg) {
+        textToSpeech.speak(msg, TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
     private void startAlertActivity() {
@@ -138,39 +142,35 @@ public class CradleService extends Service {
         startActivity(intent);
     }
 
-
-    // Handler that receives messages from the thread
-    private final class ServiceHandler extends Handler {
-        public ServiceHandler(Looper looper) {
-            super(looper);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            // Normally we would do some work here, like download a file.
-            // For our sample, we just sleep for 5 seconds.
-
-            System.out.println("we are inside the thread");
-
-            try {
-                Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-                if (alarmUri == null) {
-                    alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+    void initiateTextToSpeech() {
+        textToSpeech = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = textToSpeech.setLanguage(Locale.US);
+                if (result == TextToSpeech.LANG_MISSING_DATA ||
+                        result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS :: ", "Language not supported");
+                } else {
+                    Log.d("TTS :: ", "initialisation Success.");
                 }
-                Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), alarmUri);
-                ringtone.play();
-                Thread.sleep(5000);
-                ringtone.stop();
-            } catch (InterruptedException e) {
-                // Restore interrupt status.
-                Thread.currentThread().interrupt();
+            } else {
+                Log.e("TTS :: ", "initialisation failed.");
             }
-            // Stop the service using the startId, so that we don't stop
-            // the service in the middle of handling another job
-            stopSelf(msg.arg1);
-        }
+        });
     }
 
+    private String getUsernameFromStored() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String saved_username = getResources().getString(R.string.saved_username);
+        saved_username = sharedPref.getString(saved_username, "Man");
+        return saved_username;
+    }
+
+    private String getBabyNameFromStored() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String saved_baby_name = getResources().getString(R.string.saved_baby_name);
+        saved_baby_name = sharedPref.getString(saved_baby_name, "Baby");
+        return saved_baby_name;
+    }
 
     @Override
     public void onDestroy() {
@@ -181,5 +181,28 @@ public class CradleService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    // Handler that receives messages from the thread
+    private final class ServiceHandler extends Handler {
+        public ServiceHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            int alertTrigger = msg.arg2;
+
+            if (alertTrigger == 0) {
+                playAssistantSound("hello");
+            }
+            if (alertTrigger == 1) {
+                playRingtoneSound();
+            }
+            if (alertTrigger == 2) {
+                playAssistantSound("Hello");
+            }
+            stopSelf(msg.arg1);
+        }
     }
 }

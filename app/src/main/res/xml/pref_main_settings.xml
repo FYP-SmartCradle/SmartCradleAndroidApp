@@ -16,7 +16,18 @@
     <PreferenceCategory
         app:key="help_category"
         app:title="Help">
-
+        <EditTextPreference
+            app:icon="@drawable/ic_account_circle"
+            app:key="@string/pref_key_username"
+            app:title="Your Name"/>
+        <EditTextPreference
+            app:icon="@drawable/ic_child_care"
+            app:key="@string/pref_key_baby_name"
+            app:title="Baby's Name"/>
+        <EditTextPreference
+            app:icon="@drawable/ic_vpn_lock"
+            app:key="@string/server_ip_address"
+            app:title="Server IP Address"/>
         <Preference
             app:key="feedback"
             app:summary="Report technical issues or suggest new features"
@@ -27,10 +38,6 @@
             app:summary="Configure the AI Network IP address"
             app:fragment="com.example.smartcradleandroidapp.NetworkSettingFragment"
             app:title="Network Settings" />
-        <EditTextPreference
-            app:icon="@drawable/ic_vpn_lock"
-            app:key="@string/server_ip_address"
-            app:title="Server IP Address"/>
 
     </PreferenceCategory>
 

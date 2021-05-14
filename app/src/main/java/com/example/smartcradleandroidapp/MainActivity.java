@@ -23,6 +23,19 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         getThemeFromStored();
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }, 2000);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);

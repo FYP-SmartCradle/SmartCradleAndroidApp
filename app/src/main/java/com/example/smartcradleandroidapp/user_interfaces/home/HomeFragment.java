@@ -36,12 +36,13 @@ public class HomeFragment extends Fragment {
         System.out.println("saved theme in home fragement :: " + savedTheme);
         if (savedTheme.equalsIgnoreCase(getResources().getString(R.string.saved_light_theme))) {
             System.out.println("saved theme in home true case :: " + savedTheme);
-            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 System.out.println("Yes it is light theme");
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-        } if (savedTheme.equalsIgnoreCase(getResources().getString(R.string.saved_dark_theme))) {
-            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO){
+        }
+        if (savedTheme.equalsIgnoreCase(getResources().getString(R.string.saved_dark_theme))) {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
                 System.out.println("Yes it is dark theme");
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }

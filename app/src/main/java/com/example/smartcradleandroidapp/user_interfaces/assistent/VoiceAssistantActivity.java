@@ -27,12 +27,10 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class VoiceAssistantActivity extends AppCompatActivity {
 
+    MaterialTextView voiceAssistantStateIndicatorTextView;
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
     private Intent intent;
-
-    MaterialTextView voiceAssistantStateIndicatorTextView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

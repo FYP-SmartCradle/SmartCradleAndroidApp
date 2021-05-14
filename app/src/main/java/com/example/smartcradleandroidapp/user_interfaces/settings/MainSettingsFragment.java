@@ -17,14 +17,15 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.service.CradleService;
 
-import java.util.Objects;
-
 public class MainSettingsFragment extends PreferenceFragmentCompat {
 
     private static final String TAG = "MainSettingsFragment";
     EditTextPreference serverIpAddressPreference;
+    EditTextPreference userNamePreference;
+    EditTextPreference babyNamePreference;
     SwitchPreferenceCompat themeSwitchPreference;
     SwitchPreferenceCompat serviceSwitchPreference;
+
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -35,6 +36,14 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
         //Flask Rest api service handler
         getServerIpAddressFromStored();
         storeServerIpAddress();
+
+        //handle the app user name
+        getUsernameFromStored();
+        storeUsername();
+
+        //handle the baby name
+        getBabyNameFromStored();
+        storeBabyName();
 
         //Handle Themes
         getThemeFromStored();
@@ -47,16 +56,56 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
     }
 
 
+    private void storeBabyName() {
+        this.babyNamePreference.setOnPreferenceChangeListener(((preference, newValue) -> {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getResources().getString(R.string.saved_baby_name), newValue.toString());
+            editor.apply();
+            getBabyNameFromStored();
+            return true;
+        }));
+    }
+
+    private void getBabyNameFromStored() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        String saved_baby_name = getResources().getString(R.string.saved_baby_name);
+        saved_baby_name = sharedPref.getString(saved_baby_name, "Baby");
+        babyNamePreference.setSummary(saved_baby_name);
+    }
+
+
     void initiatePreferencesByKey() {
         this.serverIpAddressPreference = findPreference("server_ip_address");
+        this.userNamePreference = findPreference(getResources().getString(R.string.pref_key_username));
+        this.babyNamePreference = findPreference(getResources().getString(R.string.pref_key_baby_name));
         this.themeSwitchPreference = findPreference(getResources().getString(R.string.pref_key_theme));
         this.serviceSwitchPreference = findPreference(getResources().getString(R.string.pref_key_services));
     }
 
 
+    private void storeUsername() {
+        this.userNamePreference.setOnPreferenceChangeListener(((preference, newValue) -> {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getResources().getString(R.string.saved_username), newValue.toString());
+            editor.apply();
+            getUsernameFromStored();
+            return true;
+        }));
+    }
+
+    private void getUsernameFromStored() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        String saved_username = getResources().getString(R.string.saved_username);
+        saved_username = sharedPref.getString(saved_username, "Man");
+        userNamePreference.setSummary(saved_username);
+    }
+
+
     void storeServerIpAddress() {
         this.serverIpAddressPreference.setOnPreferenceChangeListener((preference, value) -> {
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getResources().getString(R.string.saved_server_ip_address), value.toString());
             editor.apply();
@@ -66,7 +115,7 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
     }
 
     void storeThemeConfiguration() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
         SharedPreferences.Editor editor = sharedPref.edit();
         this.themeSwitchPreference.setOnPreferenceChangeListener((preference, value) -> {
 
@@ -90,7 +139,6 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext());
         String saved_ip_address = getResources().getString(R.string.saved_server_ip_address);
         saved_ip_address = sharedPref.getString(saved_ip_address, "0.0.0.0");
-        System.out.println("saved ip address " + saved_ip_address);
         serverIpAddressPreference.setSummary(saved_ip_address);
     }
 
@@ -142,12 +190,10 @@ public class MainSettingsFragment extends PreferenceFragmentCompat {
     public void startCradleForegroundService() {
         String input = "This is Cradle Service integration";
         Log.v(TAG, "Service Started from home");
-
         Intent serviceIntent = new Intent(getContext(), CradleService.class);
         serviceIntent.putExtra("sendWithKey", input);
         ContextCompat.startForegroundService(requireContext(), serviceIntent);
         Log.v(TAG, "Service Started intentService");
-
     }
 
     public void stopCradleForegroundService() {
