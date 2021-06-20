@@ -28,6 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCradleAndroidApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".user_interfaces.alert.AlertIndicatorActivity"></activity>
         <activity
             android:name=".user_interfaces.settings.SettingsPreferenceActivity"
             android:parentActivityName=".user_interfaces.home.HomeActivity" />
@@ -53,10 +54,12 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Service -->
         <service android:name=".service.CradleService" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
