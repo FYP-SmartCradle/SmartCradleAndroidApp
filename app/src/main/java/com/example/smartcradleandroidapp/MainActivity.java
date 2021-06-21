@@ -10,6 +10,7 @@ import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.smartcradleandroidapp.user_interfaces.alert.AlertIndicatorActivity;
 import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 
 import java.util.Objects;
@@ -20,28 +21,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        // Objects.requireNonNull(getSupportActionBar()).hide();
 
         getThemeFromStored();
 
-        final Handler handler = new Handler(Looper.getMainLooper());
+        /*final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
-            finish();
-        }, 2000);
+        }, 2000);*/
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
-        }, 2000);
+
     }
 
     void getThemeFromStored() {

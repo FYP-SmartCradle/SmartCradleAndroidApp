@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.smartcradleandroidapp.R;
+import com.example.smartcradleandroidapp.user_interfaces.alert.AlertIndicatorActivity;
 import com.example.smartcradleandroidapp.user_interfaces.assistent.VoiceAssistantActivity;
 import com.example.smartcradleandroidapp.user_interfaces.live_streaming.LiveSteamingActivity;
 import com.example.smartcradleandroidapp.user_interfaces.settings.SettingsPreferenceActivity;
@@ -145,8 +146,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_setting:
-                //Intent intentSettings = new Intent(this, SettingsActivity.class);
-                Intent intentSettings = new Intent(this, SettingsPreferenceActivity.class);
+                Intent intentSettings = new Intent(this, AlertIndicatorActivity.class);
+                // Intent intentSettings = new Intent(this, SettingsPreferenceActivity.class);
                 startActivity(intentSettings);
                 navigationView.setCheckedItem(R.id.nav_setting);
                 break;

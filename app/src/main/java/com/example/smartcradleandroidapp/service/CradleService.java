@@ -23,7 +23,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.smartcradleandroidapp.MainActivity;
 import com.example.smartcradleandroidapp.R;
-import com.example.smartcradleandroidapp.user_interfaces.settings.DummySettings;
+import com.example.smartcradleandroidapp.user_interfaces.alert.AlertIndicatorActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +37,7 @@ public class CradleService extends Service {
     private static final String TAG = "CradleService";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    DatabaseReference referenceVoicePrediction = database.getReference("voice_prediction");
 
     private ServiceHandler serviceHandler;
     private TextToSpeech textToSpeech;
@@ -82,7 +82,7 @@ public class CradleService extends Service {
 
     private void myRefOnClickListener() {
         // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        referenceVoicePrediction.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -143,7 +143,7 @@ public class CradleService extends Service {
     }
 
     private void startAlertActivity() {
-        Intent intent = new Intent(this, DummySettings.class);
+        Intent intent = new Intent(this, AlertIndicatorActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

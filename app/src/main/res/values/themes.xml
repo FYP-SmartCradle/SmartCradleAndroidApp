@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/green_700</item>
-        <item name="colorSecondaryVariant">@color/green_700</item>
+        <item name="colorSecondaryVariant">@color/primary_green</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->
@@ -16,6 +16,11 @@
 
 
         <!-- Customize your theme here. -->
+
+        <!-- we remove the action bar from the app -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
 
     </style>
