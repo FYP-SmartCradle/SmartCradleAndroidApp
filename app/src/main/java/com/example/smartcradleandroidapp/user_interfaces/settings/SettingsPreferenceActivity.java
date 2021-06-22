@@ -18,10 +18,10 @@ public class SettingsPreferenceActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActionBar ab = getSupportActionBar();
+       /* ActionBar ab = getSupportActionBar();
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Settings");
+        ab.setTitle("Settings");*/
 
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content,

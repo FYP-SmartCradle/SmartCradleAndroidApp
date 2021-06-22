@@ -29,10 +29,10 @@ public class LiveSteamingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_steaming);
 
-        ActionBar ab = getSupportActionBar();
+        /*ActionBar ab = getSupportActionBar();
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Live Streaming");
+        ab.setTitle("Live Streaming");*/
 
 
         myWebView = findViewById(R.id.webview);

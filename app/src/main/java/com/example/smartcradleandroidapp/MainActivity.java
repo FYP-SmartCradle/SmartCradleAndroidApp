@@ -4,16 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.example.smartcradleandroidapp.user_interfaces.alert.AlertIndicatorActivity;
 import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Objects.requireNonNull(getSupportActionBar()).hide();
-
-        getThemeFromStored();
 
         /*final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
@@ -35,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+        getThemeFromStored();
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 
@@ -48,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         savedTheme = sharedPref.getString(savedTheme, getResources().getString(R.string.saved_light_theme));
         if (savedTheme.equalsIgnoreCase(getResources().getString(R.string.saved_light_theme))) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else {
+        }
+        if (savedTheme.equalsIgnoreCase(getResources().getString(R.string.saved_dark_theme))) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
     }

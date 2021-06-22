@@ -146,10 +146,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_setting:
-                Intent intentSettings = new Intent(this, AlertIndicatorActivity.class);
-                // Intent intentSettings = new Intent(this, SettingsPreferenceActivity.class);
+                Intent intentSettings = new Intent(this, SettingsPreferenceActivity.class);
                 startActivity(intentSettings);
                 navigationView.setCheckedItem(R.id.nav_setting);
+                break;
+
+            case R.id.nav_test:
+                Intent intentTest = new Intent(this, AlertIndicatorActivity.class);
+                startActivity(intentTest);
+                navigationView.setCheckedItem(R.id.nav_test);
                 break;
 
             case R.id.nav_shut_down:
