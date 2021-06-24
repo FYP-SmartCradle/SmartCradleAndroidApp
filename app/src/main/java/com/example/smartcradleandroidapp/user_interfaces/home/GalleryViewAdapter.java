@@ -24,6 +24,7 @@ public class GalleryViewAdapter extends RecyclerView.Adapter<GalleryViewAdapter.
     View view;
     Context context;
 
+
     public GalleryViewAdapter(Context context, List<String> imageFileNameList, String imageStoredUrl) {
         this.context = context;
         this.imageFileNameList = imageFileNameList;
