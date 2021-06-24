@@ -59,7 +59,7 @@ public class AmbientFragment extends Fragment {
                                 JSONObject jsonObject = new JSONObject(response);
                                 double temperature = (double) jsonObject.get("temperature");
                                 System.out.println(response);
-                                textViewTemperature.setText(Math.round(temperature) +"°C");
+                                textViewTemperature.setText(Math.round(temperature) + "°C");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

@@ -14,11 +14,10 @@ import androidx.preference.PreferenceManager;
 import com.example.smartcradleandroidapp.R;
 
 public class AlertIndicatorActivity extends AppCompatActivity {
+    private final static String TAG = AlertIndicatorActivity.class.getCanonicalName();
     ImageView imageView;
     String savedServerIpAddress;
     WebView webView;
-
-    private final static String TAG = AlertIndicatorActivity.class.getCanonicalName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

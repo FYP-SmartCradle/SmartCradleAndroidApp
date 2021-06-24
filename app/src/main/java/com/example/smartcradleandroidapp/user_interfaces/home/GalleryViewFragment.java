@@ -34,15 +34,14 @@ import java.util.TimeZone;
 
 public class GalleryViewFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private GalleryViewAdapter mAdapter;
-    private View view;
     String savedServerIpAddress;
     String imageStoredUrl;
     ExtendedFloatingActionButton floatingActionButton;
-
     List<String> imageFileNameList = new ArrayList<>();
     Calendar calendar;
+    private RecyclerView mRecyclerView;
+    private GalleryViewAdapter mAdapter;
+    private View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +94,7 @@ public class GalleryViewFragment extends Fragment {
 
 
     private void getImageListFromServer(Calendar calendar) {
-        Date date =  new Date(calendar.getTimeInMillis());
+        Date date = new Date(calendar.getTimeInMillis());
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
         String dateStr = dateFormat.format(date);
 
