@@ -39,7 +39,7 @@ public class AlertIndicatorActivity extends AppCompatActivity {
         webView.setVisibility(View.VISIBLE);
         try {
             if (savedServerIpAddress != null) {
-                String url = "http://" + savedServerIpAddress + "/video";
+                String url = "http://" + savedServerIpAddress + ":5000/video";
                 webView.loadUrl(url);
             }
         } catch (Exception e) {

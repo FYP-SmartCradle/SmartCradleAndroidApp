@@ -1,13 +1,15 @@
 package com.example.smartcradleandroidapp.user_interfaces.live_streaming;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
 
 import com.android.volley.Request;
@@ -15,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smartcradleandroidapp.R;
+import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class LiveSteamingActivity extends AppCompatActivity {
@@ -34,6 +37,13 @@ public class LiveSteamingActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Live Streaming");*/
 
+        Toolbar toolbar = findViewById(R.id.topAppBar);
+        toolbar.setNavigationOnClickListener(v -> {
+            Intent intentMainActivity = new Intent(this, HomeActivity.class);
+            startActivity(intentMainActivity);
+            finish();
+        });
+
 
         myWebView = findViewById(R.id.webview);
         buttonCaptureLiveStreaming = findViewById(R.id.btn_live_stream_capture);
@@ -42,17 +52,18 @@ public class LiveSteamingActivity extends AppCompatActivity {
         loadWebViewContent();
         listenButtonCaptureLiveStreaming();
 
+
     }
 
     private void listenButtonCaptureLiveStreaming() {
         buttonCaptureLiveStreaming.setOnClickListener(click -> {
-            System.out.println(click.toString());
-            //TODO : CAPTURE THE CLIP..
+            captureImage();
         });
     }
 
     public void reloadWebView(View view) {
-        myWebView.loadUrl("http://192.168.1.100:5000/video");
+        String url = "http://" + savedServerIpAddress + ":5000/video";
+        myWebView.loadUrl(url);
     }
 
 
@@ -67,7 +78,7 @@ public class LiveSteamingActivity extends AppCompatActivity {
     void loadWebViewContent() {
         try {
             if (savedServerIpAddress != null) {
-                String url = "http://" + savedServerIpAddress + "/video";
+                String url = "http://" + savedServerIpAddress + ":5000/video";
                 myWebView.loadUrl(url);
             }
         } catch (Exception e) {
@@ -75,17 +86,16 @@ public class LiveSteamingActivity extends AppCompatActivity {
         }
     }
 
-    public void captureView(View view) {
-        captureImage();
-    }
 
     private void captureImage() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://" + savedServerIpAddress + "/captureImage";
-
+        String url = "http://" + savedServerIpAddress + ":5000/api/save-image";
+        System.out.println(url);
         try {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    System.out::println,
+                    response -> {
+                        Toast.makeText(this, "Saved Successfully", Toast.LENGTH_SHORT).show();
+                    },
                     error -> System.out.println(error.toString()));
             queue.add(stringRequest);
         } catch (Exception e) {

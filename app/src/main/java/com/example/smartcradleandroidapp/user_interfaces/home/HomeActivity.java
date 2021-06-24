@@ -75,10 +75,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
         startHomeFragmentFirst(savedInstanceState);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.home_fragment_container, new HomeFragment())
+                .commit();
+        navigationView.setCheckedItem(R.id.nav_home);
+    }
 
     private void startHomeFragmentFirst(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
@@ -120,6 +128,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent liveStreamingIntent = new Intent(this, LiveSteamingActivity.class);
                 startActivity(liveStreamingIntent);
                 navigationView.setCheckedItem(R.id.nav_live_streaming);
+                break;
+
+            case R.id.nav_gallery_view:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_fragment_container, new GalleryViewFragment())
+                        .commit();
+                navigationView.setCheckedItem(R.id.nav_gallery_view);
                 break;
 
 

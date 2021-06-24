@@ -1,14 +1,17 @@
 package com.example.smartcradleandroidapp.user_interfaces.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.smartcradleandroidapp.R;
+import com.example.smartcradleandroidapp.user_interfaces.home.HomeActivity;
 
 
 public class SettingsPreferenceActivity extends AppCompatActivity implements
@@ -18,13 +21,18 @@ public class SettingsPreferenceActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       /* ActionBar ab = getSupportActionBar();
-        assert ab != null;
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Settings");*/
+        setContentView(R.layout.activity_settings_preference);
+
+        Toolbar toolbar = findViewById(R.id.appBarSettings);
+        toolbar.setNavigationOnClickListener(v -> {
+            Intent intentMainActivity = new Intent(this, HomeActivity.class);
+            startActivity(intentMainActivity);
+            finish();
+        });
+
 
         getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content,
+                .replace(R.id.settings_container,
                         new MainSettingsFragment()).commit();
     }
 

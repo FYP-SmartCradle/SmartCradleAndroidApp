@@ -17,6 +17,11 @@
             android:icon="@drawable/ic_plug"
             android:title="Appliance" />
         <item
+            android:id="@+id/nav_gallery_view"
+            android:icon="@drawable/ic_photo_library"
+            android:title="Gallery"
+            />
+        <item
             android:id="@+id/nav_live_streaming"
             android:icon="@drawable/ic_live_streaming"
             android:title="Live Streaming" />
