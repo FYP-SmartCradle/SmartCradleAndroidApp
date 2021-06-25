@@ -126,12 +126,13 @@ public class HomeFragment extends Fragment {
 //        for (int c : ColorTemplate.LIBERTY_COLORS)
 //            colors.add(c);
 //
-//        for (int c : ColorTemplate.PASTEL_COLORS)
-//            colors.add(c);
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
 
         // colors.add(ColorTemplate.getHoloBlue());
 
         dataSet.setColors(colors);
+        dataSet.setUsingSliceColorAsValueLineColor(true);
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
