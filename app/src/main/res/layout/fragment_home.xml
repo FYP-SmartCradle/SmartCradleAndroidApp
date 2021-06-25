@@ -4,157 +4,197 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
-    android:background="@drawable/background_gradient_1"
     tools:context=".user_interfaces.home.HomeFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            app:cardElevation="5dp"
-            app:rippleColor="@color/green_700"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:strokeColor="@color/primary_green"
-            app:strokeWidth="2dp">
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <TableLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="10dp"
+                android:src="@drawable/maternity" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_gradient_3"
-                android:gravity="left"
-                android:padding="1dp"
-                android:stretchColumns="*"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toStartOf="parent">
+                android:fontFamily="@font/poppins_medium"
+                android:text="Dashboard"
+                android:textSize="35sp" />
 
-                <TableRow
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:padding="10dp"
                         android:src="@drawable/voice_recognition" />
 
                     <TextView
-                        android:gravity="center"
                         android:id="@+id/textViewVoiceStatus"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
                         android:padding="7dp"
                         android:text="Crying"
-                        android:textColor="?attr/colorPrimaryVariant"
-                        android:textSize="40sp" />
+                        android:textSize="25sp" />
 
-                </TableRow>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <TableRow
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                app:rippleColor="@color/green_700"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:padding="5dp"
                         android:src="@drawable/baby_posture" />
 
 
                     <TextView
-                        android:gravity="center"
                         android:id="@+id/textViewLyingPostureStatus"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
                         android:padding="7dp"
                         android:text="Normal"
-                        android:textColor="?attr/colorPrimaryVariant"
-                        android:textSize="40sp" />
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                </TableRow>
 
-                <TableRow
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:padding="5dp"
                         android:src="@drawable/wet" />
 
                     <TextView
-                        android:gravity="center"
                         android:id="@+id/textViewWetStatus"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
                         android:padding="7dp"
                         android:text="Normal"
-                        android:textColor="?attr/colorPrimaryVariant"
-                        android:textSize="40sp" />
+                        android:textSize="25sp" />
 
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:padding="5dp"
                         android:src="@drawable/hot_temperature" />
 
                     <TextView
-                        android:gravity="center"
                         android:id="@+id/textViewTemperatureStatus"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
                         android:padding="7dp"
                         android:text="30.0C"
-                        android:textColor="?attr/colorPrimaryVariant"
-                        android:textSize="40sp" />
+                        android:textSize="25sp" />
 
-                </TableRow>
+                </LinearLayout>
 
-            </TableLayout>
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
 
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,6 +204,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/background_gradient_4"
                 android:padding="5dp">
 
                 <LinearLayout
@@ -203,7 +244,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -213,6 +254,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/background_gradient_4"
                 android:padding="5dp">
 
                 <LinearLayout
