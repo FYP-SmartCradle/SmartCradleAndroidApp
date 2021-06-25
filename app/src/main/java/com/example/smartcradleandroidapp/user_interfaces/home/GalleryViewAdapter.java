@@ -58,7 +58,6 @@ public class GalleryViewAdapter extends RecyclerView.Adapter<GalleryViewAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-
         View itemView;
 
         public ViewHolder(@NonNull View itemView) {
