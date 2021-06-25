@@ -18,11 +18,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smartcradleandroidapp.R;
+import com.example.smartcradleandroidapp.model.ImageStore;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,7 +40,7 @@ public class GalleryViewFragment extends Fragment {
     String savedServerIpAddress;
     String imageStoredUrl;
     ExtendedFloatingActionButton floatingActionButton;
-    List<String> imageFileNameList = new ArrayList<>();
+    List<ImageStore> imageFileNameList = new ArrayList<>();
     Calendar calendar;
     private RecyclerView mRecyclerView;
     private GalleryViewAdapter mAdapter;
@@ -115,7 +118,9 @@ public class GalleryViewFragment extends Fragment {
                         imageFileNameList = new ArrayList<>();
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            imageFileNameList.add(jsonArray.getString(i));
+                            JSONObject o = jsonArray.getJSONObject(i);
+                            imageFileNameList.add(new ImageStore(o.getString("date_label"),
+                                    o.getString("file_name"),o.getString("label_found")));
                         }
 
                         mAdapter = new GalleryViewAdapter(view.getContext(), imageFileNameList, imageStoredUrl);

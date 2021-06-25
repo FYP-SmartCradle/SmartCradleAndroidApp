@@ -14,18 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcradleandroidapp.R;
+import com.example.smartcradleandroidapp.model.ImageStore;
 
 import java.util.List;
 
 public class GalleryViewAdapter extends RecyclerView.Adapter<GalleryViewAdapter.ViewHolder> {
 
-    List<String> imageFileNameList;
+    List<ImageStore> imageFileNameList;
     String imageStoredUrl;
     View view;
     Context context;
 
 
-    public GalleryViewAdapter(Context context, List<String> imageFileNameList, String imageStoredUrl) {
+    public GalleryViewAdapter(Context context, List<ImageStore> imageFileNameList, String imageStoredUrl) {
         this.context = context;
         this.imageFileNameList = imageFileNameList;
         this.imageStoredUrl = imageStoredUrl;
@@ -41,11 +42,11 @@ public class GalleryViewAdapter extends RecyclerView.Adapter<GalleryViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Uri uri = Uri.parse(imageStoredUrl + imageFileNameList.get(position));
+        Uri uri = Uri.parse(imageStoredUrl + imageFileNameList.get(position).getFileName());
         Glide.with(view.getContext()).load(uri).into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {
-            DialogFragment newFragment = new ImageViewDialogFragment(uri);
+            DialogFragment newFragment = new ImageViewDialogFragment(uri , imageFileNameList.get(position));
             FragmentManager fm = ((HomeActivity) context).getSupportFragmentManager();
             newFragment.show(fm, "");
         });
