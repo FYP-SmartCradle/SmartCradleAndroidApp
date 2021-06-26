@@ -47,7 +47,7 @@ public class AlertIndicatorActivity extends AppCompatActivity {
     }
 
 
-    void getServerIpAddressFromStored() {
+    private void getServerIpAddressFromStored() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String saved_ip_address = getResources().getString(R.string.saved_server_ip_address);
         saved_ip_address = sharedPref.getString(saved_ip_address, "0.0.0.0");

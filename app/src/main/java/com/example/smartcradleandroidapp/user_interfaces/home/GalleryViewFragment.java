@@ -64,7 +64,6 @@ public class GalleryViewFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recycler_view_gallery);
         floatingActionButton = view.findViewById(R.id.floatingButtonDateRangeGalleryView);
         this.view = view;
-
     }
 
     @Override
