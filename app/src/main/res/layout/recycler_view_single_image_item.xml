@@ -8,36 +8,42 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:padding="10dp"
-        app:cardElevation="3dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/background_gradient_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+           <!-- <TextView
+                android:layout_width="wrap_content"
+                android:text="Image Label"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="13sp"
+                android:layout_height="wrap_content"/>-->
+
             <ImageView
                 android:id="@+id/imageViewGalleryViewImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_photo_library"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:src="@drawable/ic_photo_library" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/app_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewGalleryViewImage" />
+                android:layout_margin="5dp"
+                android:text="Captured"
+                android:fontFamily="@font/poppins_light"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

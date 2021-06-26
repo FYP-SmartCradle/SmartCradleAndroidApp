@@ -10,6 +10,7 @@
         android:id="@+id/recycler_view_gallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_gradient_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         app:elevation="0dp"
-        app:iconTint="@color/white"
         app:icon="@drawable/ic_date_range"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
