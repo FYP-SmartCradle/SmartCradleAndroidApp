@@ -43,19 +43,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_reload_live_streaming"
         style="@style/Widget.MaterialComponents.Button.IconOnly"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="20dp"
         android:onClick="reloadWebView"
         app:icon="@drawable/ic_remove_red_eye"
-        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewAppNameAlert"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-       />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_voice_assistant_alert"
+        style="@style/Widget.MaterialComponents.Button.IconOnly"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="turnVoiceRecognitionOn"
+        app:icon="@drawable/ic_mic"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAppNameAlert"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewAppNameAlert"

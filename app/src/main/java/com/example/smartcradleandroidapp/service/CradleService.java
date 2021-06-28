@@ -38,15 +38,24 @@ public class CradleService extends Service {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference referenceVoicePrediction = database.getReference("voice_prediction");
+    DatabaseReference referencePostureAnalysis = database.getReference("posture_prediction");
+    DatabaseReference referenceWetValue = database.getReference("wet_value");
 
     private ServiceHandler serviceHandler;
     private TextToSpeech textToSpeech;
 
     @Override
     public void onCreate() {
-        //only one time. when there service starts first time. only once in the lifecycle
-        this.myRefOnClickListener();
         super.onCreate();
+        //only one time. when there service starts first time. only once in the lifecycle
+
+        referenceVoicePrediction.setValue("silence");
+        referencePostureAnalysis.setValue("good");
+        referenceWetValue.setValue("good");
+
+        this.myRefOnClickListener();
+
+
 
         HandlerThread thread = new HandlerThread("ServiceStartArguments");
         thread.start();
@@ -93,16 +102,12 @@ public class CradleService extends Service {
                 assert value != null;
                 if (value.equalsIgnoreCase("cry")) {
 
-                    System.out.println("baby crying found");
-
                     Message msg = serviceHandler.obtainMessage();
                     msg.arg1 = 10041996;
                     msg.arg2 = 0;
-
                     serviceHandler.sendMessage(msg);
-
                     startAlertActivity();
-                    //playRingtoneSound();
+
                 }
             }
 
@@ -110,6 +115,48 @@ public class CradleService extends Service {
             public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+
+        referencePostureAnalysis.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                assert value != null;
+                if (value.equalsIgnoreCase("bad")) {
+                    Message msg = serviceHandler.obtainMessage();
+                    msg.arg1 = 10041996;
+                    msg.arg2 = 1;
+                    serviceHandler.sendMessage(msg);
+                    startAlertActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+
+        referenceWetValue.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                assert value != null;
+                if (value.equalsIgnoreCase("bad")) {
+                    Message msg = serviceHandler.obtainMessage();
+                    msg.arg1 = 10041996;
+                    msg.arg2 = 3;
+                    serviceHandler.sendMessage(msg);
+                    startAlertActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -123,8 +170,10 @@ public class CradleService extends Service {
             }
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), alarmUri);
             ringtone.play();
-            Thread.sleep(5000);
+            Thread.sleep(8000);
             ringtone.stop();
+
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             // Restore interrupt status.
             Thread.currentThread().interrupt();
@@ -133,13 +182,35 @@ public class CradleService extends Service {
 
     public void playAssistantSound(String msg) {
 
+        playRingtoneSound();
+
         String userName = getUsernameFromStored();
         String babyName = getBabyNameFromStored();
 
         StringBuilder speechBuilder = new StringBuilder();
-        speechBuilder.append("Hey! ").append(userName).append(", ").append(babyName).append("is now ").append(msg);
+
+        switch (msg) {
+            case "cry": {
+                speechBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
+                        .append("has started crying now. Could you please take of it?");
+                break;
+            }
+
+            case "posture": {
+                speechBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
+                        .append("is lying in a bad posture now. Could you please have a look?");
+                break;
+            }
+
+            case "wet": {
+                speechBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
+                        .append(" has wet the cloths. Could you clean it once?");
+                break;
+            }
+        }
 
         textToSpeech.speak(speechBuilder.toString(), TextToSpeech.QUEUE_FLUSH, null, null);
+
     }
 
     private void startAlertActivity() {
@@ -200,13 +271,16 @@ public class CradleService extends Service {
             int alertTrigger = msg.arg2;
 
             if (alertTrigger == 0) {
-                playAssistantSound("cry");
+                playAssistantSound("voice");
+
             }
             if (alertTrigger == 1) {
-                playRingtoneSound();
+                playAssistantSound("posture");
+
             }
             if (alertTrigger == 2) {
-                playAssistantSound("Hello");
+                playAssistantSound("wet");
+
             }
             stopSelf(msg.arg1);
         }

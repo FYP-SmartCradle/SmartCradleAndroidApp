@@ -121,6 +121,7 @@ public class HomeFragment extends Fragment {
                         textViewTemperatureStatus.setText(o.getDouble("temperature") + "°C");
                         textViewWetStatus.setText(String.valueOf(o.getDouble("wet")));
                     } catch (JSONException e) {
+                        latestStateListenStatus = false;
                         e.printStackTrace();
                     }
                 },
@@ -151,7 +152,7 @@ public class HomeFragment extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject o = jsonArray.getJSONObject(i);
-                            entries.add(new PieEntry((float) o.getDouble("hour"), o.getString("label")));
+                            entries.add(new PieEntry((float) o.getDouble("hour"), o.getString("label").toUpperCase()));
                         }
 
                         initializeChartVoiceChart(entries);
@@ -187,7 +188,7 @@ public class HomeFragment extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject o = jsonArray.getJSONObject(i);
-                            entries.add(new PieEntry((float) o.getDouble("hour"), o.getString("label")));
+                            entries.add(new PieEntry((float) o.getDouble("hour"), o.getString("label").toUpperCase()));
                         }
 
                         initializeChartLyingPostureChart(entries);
@@ -385,11 +386,11 @@ public class HomeFragment extends Fragment {
 //        for (int c : ColorTemplate.COLORFUL_COLORS)
 //            colors.add(c);
 //
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-//
-//        for (int c : ColorTemplate.PASTEL_COLORS)
+//        for (int c : ColorTemplate.LIBERTY_COLORS)
 //            colors.add(c);
+//
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
 
         // colors.add(ColorTemplate.getHoloBlue());
 
