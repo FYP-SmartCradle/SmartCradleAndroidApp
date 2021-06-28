@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.smartcradleandroidapp.R;
 import com.example.smartcradleandroidapp.user_interfaces.assistent.VoiceAssistantActivity;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -41,6 +42,7 @@ public class AlertIndicatorActivity extends AppCompatActivity {
     WebView webView;
     MaterialButton btnWebView;
     MaterialButton btnVoiceAssistant;
+    MaterialCardView materialCardViewWebView;
 
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
@@ -61,6 +63,7 @@ public class AlertIndicatorActivity extends AppCompatActivity {
         webView = findViewById(R.id.webViewLiveStreamingAlertActivity);
         btnWebView  = findViewById(R.id.btn_reload_live_streaming);
         btnVoiceAssistant  = findViewById(R.id.btn_voice_assistant_alert);
+        materialCardViewWebView  = findViewById(R.id.card_web_view);
 
         getServerIpAddressFromStored();
         requestForPermissions();
@@ -76,9 +79,11 @@ public class AlertIndicatorActivity extends AppCompatActivity {
     public void reloadWebView(View view) {
         if (webView.getVisibility() == View.VISIBLE) {
             webView.setVisibility(View.INVISIBLE);
+            materialCardViewWebView.setVisibility(View.INVISIBLE);
             btnWebView.setIconResource(R.drawable.ic_remove_red_eye);
         } else {
             webView.setVisibility(View.VISIBLE);
+            materialCardViewWebView.setVisibility(View.VISIBLE);
             btnWebView.setIconResource(R.drawable.ic_visibility_off);
             try {
                 if (savedServerIpAddress != null) {
