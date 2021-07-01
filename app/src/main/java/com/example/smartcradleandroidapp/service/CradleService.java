@@ -40,6 +40,7 @@ public class CradleService extends Service {
     DatabaseReference referenceVoicePrediction = database.getReference("voice_prediction");
     DatabaseReference referencePostureAnalysis = database.getReference("posture_prediction");
     DatabaseReference referenceWetValue = database.getReference("wet_value");
+    DatabaseReference referenceStrangerValue = database.getReference("stranger");
 
     private ServiceHandler serviceHandler;
     private TextToSpeech textToSpeech;
@@ -52,9 +53,9 @@ public class CradleService extends Service {
         referenceVoicePrediction.setValue("silence");
         referencePostureAnalysis.setValue("good");
         referenceWetValue.setValue("good");
+        referenceStrangerValue.setValue("no");
 
         this.myRefOnClickListener();
-
 
 
         HandlerThread thread = new HandlerThread("ServiceStartArguments");
@@ -106,7 +107,7 @@ public class CradleService extends Service {
                     msg.arg1 = 10041996;
                     msg.arg2 = 0;
                     serviceHandler.sendMessage(msg);
-                    startAlertActivity();
+                    startAlertActivity("cry");
 
                 }
             }
@@ -129,7 +130,7 @@ public class CradleService extends Service {
                     msg.arg1 = 10041996;
                     msg.arg2 = 1;
                     serviceHandler.sendMessage(msg);
-                    startAlertActivity();
+                    startAlertActivity("posture");
                 }
             }
 
@@ -150,7 +151,27 @@ public class CradleService extends Service {
                     msg.arg1 = 10041996;
                     msg.arg2 = 3;
                     serviceHandler.sendMessage(msg);
-                    startAlertActivity();
+                    startAlertActivity("wet");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        referenceStrangerValue.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                assert value != null;
+                if (value.equalsIgnoreCase("found")) {
+                    Message msg = serviceHandler.obtainMessage();
+                    msg.arg1 = 10041996;
+                    msg.arg2 = 4;
+                    serviceHandler.sendMessage(msg);
+                    startAlertActivity("stranger");
                 }
             }
 
@@ -192,13 +213,13 @@ public class CradleService extends Service {
         switch (msg) {
             case "cry": {
                 speechBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
-                        .append("has started crying now. Could you please take of it?");
+                        .append(" has started crying now. Could you please take of it?");
                 break;
             }
 
             case "posture": {
                 speechBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
-                        .append("is lying in a bad posture now. Could you please have a look?");
+                        .append(" is lying in a bad posture now. Could you please have a look?");
                 break;
             }
 
@@ -213,8 +234,40 @@ public class CradleService extends Service {
 
     }
 
-    private void startAlertActivity() {
+    private void startAlertActivity(String msg) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String userName = getUsernameFromStored();
+        String babyName = getBabyNameFromStored();
+        switch (msg) {
+            case "cry": {
+                stringBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
+                        .append(" has started crying now. Could you please take of it?");
+                break;
+            }
+
+            case "posture": {
+                stringBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
+                        .append(" is lying in a bad posture now. Could you please have a look?");
+                break;
+            }
+
+            case "wet": {
+                stringBuilder.append("Hey! ").append(userName).append(" ,  ").append(babyName)
+                        .append(" has wet the cloths. Could you clean it once?");
+                break;
+            }
+
+            case "stranger": {
+                stringBuilder.append("Hey! ").append(userName).append(" ,  ").
+                        append(" someone you don't know is near your baby. could you look at it");
+                break;
+            }
+        }
+
+
         Intent intent = new Intent(this, AlertIndicatorActivity.class);
+        intent.putExtra("msg", stringBuilder.toString());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -29,6 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/amber_700"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Dashboard"
                 android:textSize="35sp" />
@@ -44,7 +45,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="172dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp">
@@ -78,7 +79,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="172dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
@@ -122,7 +123,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="172dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp">
@@ -156,7 +157,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="172dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp">
@@ -183,7 +184,83 @@
                         android:padding="7dp"
                         android:text="30.0C"
                         android:textSize="24sp" />
+                </LinearLayout>
 
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="172dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:padding="5dp"
+                        android:src="@drawable/wink" />
+
+                    <TextView
+                        android:id="@+id/textViewFaceReactionStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:padding="7dp"
+                        android:text="Good"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="172dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:padding="5dp"
+                        android:src="@drawable/playtime" />
+
+                    <TextView
+                        android:id="@+id/textViewActiveStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:padding="7dp"
+                        android:text="Active"
+                        android:textSize="22sp" />
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -194,7 +271,7 @@
         <com.google.android.material.card.MaterialCardView
 
             android:layout_width="match_parent"
-            android:layout_height="460dp"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
@@ -224,15 +301,42 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
+                        android:textColor="@color/green_700"
                         android:text="Voice Analysis"
                         android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutChartVoiceButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chartVoice">
+
+                    <Button
+                        android:id="@+id/btnDateVoiceAnalysis"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.IconOnly_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        app:iconSize="20sp"
+                        app:iconTint="@color/amber_700"
+                        android:layout_marginEnd="15dp"
+                        app:icon="@drawable/ic_date_range"
+                        app:iconGravity="textStart"
+                        app:shapeAppearance="@style/pillShapeAppearance" />
+
                 </LinearLayout>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chartVoice"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="390dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayoutHeaderPosture" />
@@ -244,7 +348,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="460dp"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
@@ -274,6 +378,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
+                        android:textColor="@color/green_700"
                         android:text="Posture Analysis"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -281,13 +386,41 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chartLyingPosture"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="390dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayoutHeaderVoice" />
 
+
+                <LinearLayout
+                    android:id="@+id/layoutChartPostureButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chartLyingPosture">
+
+                    <Button
+                        android:id="@+id/btnDatePostureAnalysis"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.IconOnly_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        app:iconSize="20sp"
+                        app:iconTint="@color/amber_700"
+                        android:layout_marginEnd="15dp"
+                        app:icon="@drawable/ic_date_range"
+                        app:iconGravity="textStart"
+                        app:shapeAppearance="@style/pillShapeAppearance" />
+
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </com.google.android.material.card.MaterialCardView>
 

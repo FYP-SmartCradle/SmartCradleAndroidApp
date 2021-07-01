@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -45,8 +46,10 @@ public class GalleryViewAdapter extends RecyclerView.Adapter<GalleryViewAdapter.
         Uri uri = Uri.parse(imageStoredUrl + imageFileNameList.get(position).getFileName());
         Glide.with(view.getContext()).load(uri).into(holder.imageView);
 
+        holder.textViewImageLabel.setText(imageFileNameList.get(position).getLabelFound());
+
         holder.itemView.setOnClickListener(v -> {
-            DialogFragment newFragment = new ImageViewDialogFragment(uri , imageFileNameList.get(position));
+            DialogFragment newFragment = new ImageViewDialogFragment(uri, imageFileNameList.get(position));
             FragmentManager fm = ((HomeActivity) context).getSupportFragmentManager();
             newFragment.show(fm, "");
         });
@@ -60,11 +63,13 @@ public class GalleryViewAdapter extends RecyclerView.Adapter<GalleryViewAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         View itemView;
+        TextView textViewImageLabel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
             imageView = itemView.findViewById(R.id.imageViewGalleryViewImage);
+            textViewImageLabel = itemView.findViewById(R.id.textViewImageLabel);
 
         }
 

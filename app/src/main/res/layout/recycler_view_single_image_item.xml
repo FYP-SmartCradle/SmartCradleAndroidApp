@@ -37,9 +37,10 @@
                 android:src="@drawable/ic_photo_library" />
 
             <TextView
+                android:id="@+id/textViewImageLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="2dp"
                 android:text="Captured"
                 android:fontFamily="@font/poppins_light"/>
 

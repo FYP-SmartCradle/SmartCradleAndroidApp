@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -24,7 +24,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.smartcradleandroidapp.R;
-import com.example.smartcradleandroidapp.user_interfaces.assistent.VoiceAssistantActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
@@ -44,6 +43,8 @@ public class AlertIndicatorActivity extends AppCompatActivity {
     MaterialButton btnVoiceAssistant;
     MaterialCardView materialCardViewWebView;
 
+    TextView textViewMsgReceived;
+
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
 
@@ -59,11 +60,21 @@ public class AlertIndicatorActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
+        String msg = "Hi Senlai! Dilmi is crying.. Please take care of her";
+
+        try {
+            msg = getIntent().getStringExtra("msg");
+        } catch (Exception ignored) { }
+
+
         imageView = findViewById(R.id.imageViewBellView);
         webView = findViewById(R.id.webViewLiveStreamingAlertActivity);
-        btnWebView  = findViewById(R.id.btn_reload_live_streaming);
-        btnVoiceAssistant  = findViewById(R.id.btn_voice_assistant_alert);
-        materialCardViewWebView  = findViewById(R.id.card_web_view);
+        btnWebView = findViewById(R.id.btn_reload_live_streaming);
+        btnVoiceAssistant = findViewById(R.id.btn_voice_assistant_alert);
+        materialCardViewWebView = findViewById(R.id.card_web_view);
+        textViewMsgReceived = findViewById(R.id.textViewMsgReceived);
+
+        textViewMsgReceived.setText(msg);
 
         getServerIpAddressFromStored();
         requestForPermissions();
@@ -206,7 +217,8 @@ public class AlertIndicatorActivity extends AppCompatActivity {
                 .append(":5000/api/arduino/led/").append(status);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlBuilder.toString(),
-                response -> {}, error -> Log.d("", error.toString()));
+                response -> {
+                }, error -> Log.d("", error.toString()));
 
         queue.add(stringRequest);
     }

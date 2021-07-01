@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,12 +29,18 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class HomeFragment extends Fragment {
 
@@ -44,9 +51,15 @@ public class HomeFragment extends Fragment {
     TextView textViewVoiceStatus;
     TextView textViewLyingPostureStatus;
     TextView textViewWetStatus;
+    TextView textViewActiveStatus;
 
     Thread thread;
     boolean latestStateListenStatus = true;
+
+    Calendar calendar;
+
+    Button btnDateVoiceAnalysis;
+    Button btnDatePostureAnalysis;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,19 +77,26 @@ public class HomeFragment extends Fragment {
         textViewTemperatureStatus = view.findViewById(R.id.textViewTemperatureStatus);
         textViewLyingPostureStatus = view.findViewById(R.id.textViewLyingPostureStatus);
         textViewWetStatus = view.findViewById(R.id.textViewWetStatus);
+        textViewActiveStatus = view.findViewById(R.id.textViewActiveStatus);
+
+        btnDateVoiceAnalysis = view.findViewById(R.id.btnDateVoiceAnalysis);
+        btnDatePostureAnalysis = view.findViewById(R.id.btnDatePostureAnalysis);
 
         getServerIpAddressFromStored();
-
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
         latestStateListenStatus = true;
+
+        calendar = Calendar.getInstance(TimeZone.getDefault());
         getLatestStateContinuously();
-        getVoiceAnalysis();
-        getLyingPostureAnalysis();
+        getVoiceAnalysis(calendar);
+        getLyingPostureAnalysis(calendar);
+
+        showDatePickerDialogVoice();
+        showDatePickerDialogPosture();
     }
 
     @Override
@@ -91,7 +111,7 @@ public class HomeFragment extends Fragment {
                 System.out.println("listening to latest state *****");
                 getLatestState();
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -119,13 +139,15 @@ public class HomeFragment extends Fragment {
                         textViewVoiceStatus.setText(o.getString("sound"));
                         textViewLyingPostureStatus.setText(o.getString("lyingPosture"));
                         textViewTemperatureStatus.setText(o.getDouble("temperature") + "°C");
-                        textViewWetStatus.setText(String.valueOf(o.getDouble("wet")));
+                        textViewWetStatus.setText(o.getDouble("wet") + "%");
+                        textViewActiveStatus.setText(o.getString("movement"));
                     } catch (JSONException e) {
                         latestStateListenStatus = false;
                         e.printStackTrace();
                     }
                 },
                 error -> {
+                    latestStateListenStatus = false;
                     System.out.println(error.toString());
                 });
 
@@ -133,7 +155,13 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void getVoiceAnalysis() {
+    private void getVoiceAnalysis(Calendar calendar) {
+
+        Date date = new Date(calendar.getTimeInMillis());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStr = dateFormat.format(date);
+
+
         ArrayList<PieEntry> entries = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
         StringBuilder urlBuilder = new StringBuilder();
@@ -141,7 +169,7 @@ public class HomeFragment extends Fragment {
                 .append("http://")
                 .append(savedServerIpAddress)
                 .append(":5000/api/database_analysis/get_one_day_summary_for_voice/")
-                .append("2021-06-25");
+                .append(dateStr);
 
         System.out.println(urlBuilder.toString());
 
@@ -169,7 +197,13 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void getLyingPostureAnalysis() {
+    private void getLyingPostureAnalysis(Calendar calendar) {
+
+        Date date = new Date(calendar.getTimeInMillis());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStr = dateFormat.format(date);
+
+
         ArrayList<PieEntry> entries = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
         StringBuilder urlBuilder = new StringBuilder();
@@ -177,7 +211,7 @@ public class HomeFragment extends Fragment {
                 .append("http://")
                 .append(savedServerIpAddress)
                 .append(":5000/api/database_analysis/get_one_day_summary_for_lying_posture/")
-                .append("2021-06-25");
+                .append(dateStr);
 
         System.out.println(urlBuilder.toString());
 
@@ -444,5 +478,38 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+
+    public void showDatePickerDialogVoice() {
+
+        btnDateVoiceAnalysis.setOnClickListener(v -> {
+            MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select Date For Voice Data").build();
+
+            datePicker.addOnPositiveButtonClickListener(view_date -> {
+                assert datePicker.getSelection() != null;
+                calendar.setTimeInMillis((Long) datePicker.getSelection());
+                getVoiceAnalysis(calendar);
+            });
+
+            datePicker.show(((HomeActivity) view.getContext()).getSupportFragmentManager(), "date_picker");
+        });
+
+    }
+
+
+    public void showDatePickerDialogPosture() {
+        btnDatePostureAnalysis.setOnClickListener(v -> {
+            MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select Date For Body Posture").build();
+
+            datePicker.addOnPositiveButtonClickListener(view_date -> {
+                assert datePicker.getSelection() != null;
+                calendar.setTimeInMillis((Long) datePicker.getSelection());
+                getLyingPostureAnalysis(calendar);
+            });
+
+            datePicker.show(((HomeActivity) view.getContext()).getSupportFragmentManager(), "date_picker");
+        });
+
     }
 }
